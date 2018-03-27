@@ -131,4 +131,25 @@ public class User {
   public void setCreditCardExpirationDate(String creditCardExpirationDate) {
     this.creditCardExpirationDate = creditCardExpirationDate;
   }
+
+  public String getAddressHTMLFormat(){
+    String address=firstName+" "+lastName +"<br>";
+    if((companyName==null)||companyName.equals("")||companyName.equals(" ")){
+      address+="";
+    }else{
+      address+=companyName+"<br>";
+    }
+    address += address1 + "<br>";
+
+    if (address2 == null || address2.equals("") || address2.equals(" ")) {
+      address += "";
+    } else {
+      address += address2 + "<br>";
+    }
+
+    address += city + ", " + state + " " + zip + "<br>"
+        + country;
+
+    return address;
+  }
 }

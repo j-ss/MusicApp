@@ -12,8 +12,17 @@ public class Invoice {
   private List<LineItem> lineitems;
   private Date invoiceDate;
   private int invoiceNumber;
+  private boolean isProcessed;
 
   public Invoice() {
+  }
+
+  public boolean isProcessed() {
+    return isProcessed;
+  }
+
+  public void setProcessed(boolean processed) {
+    isProcessed = processed;
   }
 
   public User getUser() {

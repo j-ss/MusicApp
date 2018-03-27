@@ -111,7 +111,7 @@ public class CatalogController extends HttpServlet {
     }
     HttpSession session=request.getSession();
     session.setAttribute("user",user);
-
+    session.setMaxInactiveInterval(60*60*24);
     Cookie cookie=new Cookie("email",email);
     cookie.setPath("/");
     cookie.setMaxAge(60*60*24);
