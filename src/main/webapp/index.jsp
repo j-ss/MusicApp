@@ -5,6 +5,5 @@
 <section>
     Hello
 </section>
-
-<%@include file="includes/footer.jsp"%>
 <%@include file="includes/column_right_home.jsp"%>
+<%@include file="includes/footer.jsp"%>

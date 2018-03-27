@@ -8,13 +8,13 @@
         <a class="current" href="<c:url value='/'/> ">Home</a>
     </li>
     <li>
-        <a class="current" href="<c:url value='/catalog'/> ">Catalog</a>
+        <a  href="<c:url value='/catalog'/> ">Catalog</a>
     </li>
     <li>
-        <a class="current" href="<c:url value='/email'/> ">Email</a>
+        <a  href="<c:url value='/email'/> ">Email</a>
     </li>
     <li>
-        <a class="current" href="<c:url value='/customer_service'/> ">Customer service</a>
+        <a  href="<c:url value='/customer_service'/> ">Customer service</a>
     </li>
 </ul>
 
