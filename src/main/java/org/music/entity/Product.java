@@ -1,14 +1,24 @@
 package org.music.entity;
 
+import java.io.Serializable;
 import java.text.NumberFormat;
 
-public class Product {
+public class Product implements Serializable{
 
+  private Long productId;
   private String code;
   private String description;
   private double price;
 
   public Product() {
+  }
+
+  public Long getProductId() {
+    return productId;
+  }
+
+  public void setProductId(Long productId) {
+    this.productId = productId;
   }
 
   public String getCode() {
@@ -48,7 +58,7 @@ public class Product {
 
   //This method return albumn name
   public String getAlbumName(){
-    return description.substring(0,description.indexOf('-')+3);
+    return description.substring(description.indexOf('-')+1);
   }
 
   //This method return image url

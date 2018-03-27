@@ -2,6 +2,7 @@ package org.music.entity;
 
 public class User {
 
+  private long userId;
   private String firstName;
   private String lastName;
   private String email;
@@ -17,6 +18,14 @@ public class User {
   private String creditCardExpirationDate;
 
   public User() {
+  }
+
+  public long getUserId() {
+    return userId;
+  }
+
+  public void setUserId(long userId) {
+    this.userId = userId;
   }
 
   public String getFirstName() {
