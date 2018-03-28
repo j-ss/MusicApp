@@ -8,4 +8,13 @@
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
+
+    <context-param>
+        <param-name>serviceemail</param-name>
+        <param-value>jogender@gmail.com</param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>org.music.util.ContextListner</listener-class>
+    </listener>
 </web-app>

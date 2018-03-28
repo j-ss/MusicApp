@@ -1,5 +1,6 @@
 package org.music.controller;
 
+import org.music.dao.InvoiceDao;
 import org.music.dao.ProductDao;
 import org.music.dao.UserDao;
 import org.music.entity.Cart;
@@ -44,6 +45,12 @@ public class OrderController extends HttpServlet {
       url=displayInvoice(req,resp);
     }else if(action.equals("/processUser")){
       url=processUser(req,resp);
+    }else if(action.equals("/editUser")){
+      url="/cart/user.jsp";
+    }else if(action.equals("/displayCreditCard")){
+      url="/cart/creditCard.jsp";
+    }else if(action.equals("/completeOrder")){
+      url=completeOrder(req,resp);
     }
     req.getRequestDispatcher(url).forward(req,resp);
   }
@@ -212,5 +219,36 @@ public class OrderController extends HttpServlet {
     invoice.setLineitems(cart.getItems());
     session.setAttribute("invoice",invoice);
     return "/cart/invoice.jsp";
+  }
+
+  public String completeOrder(HttpServletRequest request,HttpServletResponse response){
+    HttpSession session=request.getSession();
+    Invoice invoice=(Invoice)session.getAttribute("invoice");
+    User user=invoice.getUser();
+    String creditCardType=request.getParameter("creditCardType");
+    String cardNumber=request.getParameter("creditCardNumber");
+    String creditCardExpirationMonth=request.getParameter("creditCardExpirationMonth");
+    String creditCardExpirationYear=request.getParameter("creditCardExpirationYear");
+    user.setCreditCardType(creditCardType);
+    user.setCreditCardNumber(cardNumber);
+    user.setCreditCardExpirationDate(creditCardExpirationMonth+"/"+creditCardExpirationYear);
+    if (UserDao.emailExists(user.getEmail())) {
+      UserDao.update(user);
+    } else { // otherwise, write a new record for the user
+      UserDao.save(user);
+    }
+    invoice.setUser(user);
+    InvoiceDao.save(invoice);
+    // set the emailCookie in the user's browser.
+    Cookie cookie = new Cookie("email",
+        user.getEmail());
+    cookie.setMaxAge(60*24*365*2*60);
+    cookie.setPath("/");
+    response.addCookie(cookie);
+
+    // remove all items from the user's cart
+    session.setAttribute("cart", null);
+
+    return "/cart/complete.jsp";
   }
 }

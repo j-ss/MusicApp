@@ -56,8 +56,44 @@
       <artifactId>hibernate-core</artifactId>
       <version>5.2.12.Final</version>
     </dependency>
+      <dependency>
+          <groupId>org.junit.jupiter</groupId>
+          <artifactId>junit-jupiter-api</artifactId>
+          <version>RELEASE</version>
+      </dependency>
   </dependencies>
   <build>
     <finalName>musicapp</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.0.0</version>
+        <configuration>
+
+
+          <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>
+              <classpathPrefix>lib/</classpathPrefix>
+            </manifest>
+          </archive>
+
+          <webResources>
+            <resource>
+              <!-- this is relative to the pom.xml directory -->
+              <directory>${project.basedir}/src/main/resources
+              </directory>
+
+            </resource>
+          </webResources>
+
+
+
+          <warName>mywar</warName>
+        </configuration>
+      </plugin>
+    </plugins>
+
   </build>
 </project>
