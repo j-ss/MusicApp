@@ -21,14 +21,14 @@ public class Email {
     Authenticator authenticator=new Authenticator() {
       @Override
       protected PasswordAuthentication getPasswordAuthentication() {
-        return new PasswordAuthentication(from,"XXXX");
+        return new PasswordAuthentication(from,"hackero07@@##");
       }
     };
     Properties prop=new Properties();
     prop.put("mail.smtp.host","smtp.gmail.com");
     prop.put("mail.smtp.port",465);
     prop.put("mail.smtp.auth",true);
-    prop.put("mail.smtp.starttls.required",true);
+    prop.put("mail.smtp.starttls.required",false);
     prop.put("mail.smtp.starttls.enable",true);
     prop.put("mail.smtp.socketFactory.class","javax.net.ssl.SSLSocketFactory");
 

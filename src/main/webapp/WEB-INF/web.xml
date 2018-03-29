@@ -11,7 +11,7 @@
 
     <context-param>
         <param-name>serviceemail</param-name>
-        <param-value>jogender@gmail.com</param-value>
+        <param-value>jogendertemp@gmail.com</param-value>
     </context-param>
 
     <listener>

@@ -18,7 +18,7 @@
 <nav id="nav_bar">
     <ul>
         <li><a href="<c:url value='/admin' />">Admin</a> </li>
-        <%--<li><a href="<c:url value='/user/deleteCookies'/> "/>Delete Cookies </li>--%>
-        <%--<li><a href="<c:url value='/order/showCart' />"/>Show Cart </li>--%>
+        <li><a href="<c:url value='/user/deleteCookies'/> "/>Delete Cookies </li>
+        <li><a href="<c:url value='/order/showCart' />"/>Show Cart </li>
     </ul>
 </nav>

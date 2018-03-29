@@ -8,6 +8,7 @@ import org.music.entity.Invoice;
 import org.music.entity.LineItem;
 import org.music.entity.Product;
 import org.music.entity.User;
+import org.music.util.Email;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -53,6 +54,28 @@ public class OrderController extends HttpServlet {
       url=completeOrder(req,resp);
     }
     req.getRequestDispatcher(url).forward(req,resp);
+  }
+
+  @Override
+  protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+      throws ServletException, IOException {
+    String action=req.getPathInfo();
+    String url=defaultURL;
+    if(action.equals("/showCart")){
+      url=showCart(req,resp);
+    }else if (action.equals("/checkUser")) {
+      url = checkUser(req, resp);
+    }
+    getServletContext().getRequestDispatcher(url).forward(req,resp);
+  }
+
+  private String showCart(HttpServletRequest req, HttpServletResponse resp) {
+    HttpSession session=req.getSession();
+    Cart cart=(Cart)session.getAttribute("cart");
+    if(cart==null||cart.getCount()==0){
+      req.setAttribute("emptyCart","your cart is empty");
+    }
+    return defaultURL;
   }
 
   public String addItem(HttpServletRequest request,HttpServletResponse response){
@@ -239,6 +262,16 @@ public class OrderController extends HttpServlet {
     }
     invoice.setUser(user);
     InvoiceDao.save(invoice);
+    Email email=new Email();
+    String from=(String)getServletContext().getAttribute("custServEmail");
+    String body = "Dear " + user.getFirstName() + ",\n\n" +
+        "Thanks for ordering from us. " +
+        "You should receive your order in 3-5 business days. " +
+        "Please contact us if you have any questions.\n" +
+        "Have a great day and thanks again!\n\n" +
+        "Joe King\n" +
+        "Fresh Corn Records";
+    email.sendMail(user.getEmail(),from,body,"Order Confirmation");
     // set the emailCookie in the user's browser.
     Cookie cookie = new Cookie("email",
         user.getEmail());
