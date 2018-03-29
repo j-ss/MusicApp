@@ -21,7 +21,7 @@ public class Email {
     Authenticator authenticator=new Authenticator() {
       @Override
       protected PasswordAuthentication getPasswordAuthentication() {
-        return new PasswordAuthentication(from,"hackero07@@##");
+        return new PasswordAuthentication(from,"XXX");
       }
     };
     Properties prop=new Properties();
